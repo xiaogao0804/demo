@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拍照与取出相册中图片</title>
+</head>
+<body>
+	  <ul class="pappers-picture">
+                <li id="#0">
+                    <input id="fileBtn" type="file" onchange="upload('#fileBtn', '#img');" />    <!-- 没有 accept="image/*" capture="camera"，拍照和从相册中去图片的功能都有 -->
+                    <img src="" id="img" style="width:100%;height:100%;"/>
+                    <span>+</span>
+                </li>
+                <li id="#1">
+                    <input id="fileBtn2" type="file" onchange="upload('#fileBtn2', '#img2');"/>
+                    <img src="" id="img2" style="width:100%;height:100%;"/>
+                    <span>+</span>
+                </li>
+                <li id="#2">
+                    <input id="fileBtn3" type="file" onchange="upload('#fileBtn3', '#img3');" accept="image/*" capture="camera"/> <!-- 有accept="image/*" capture="camera"，就只有拍照的功能 -->  
+                    <img src="" id="img3" style="width:100%;height:100%;"/>
+                    <span>+</span>
+                </li>
+                <li id="#3">
+                    <input id="fileBtn4" type="file" onchange="upload('#fileBtn4', '#img4');" accept="image/*" capture="camera"/>
+                    <img src="" id="img4" style="width:100%;height:100%;"/>
+                    <span>+</span>
+                </li>
+                <li id="#4">
+                    <input id="fileBtn5" type="file" onchange="upload('#fileBtn5', '#img5');" accept="image/*" capture="camera"/>
+                    <img src="" id="img5" style="width:100%;height:100%;"/>
+                    <span>+</span>
+                </li>
+                <li id="#5">
+                    <input id="fileBtn6" type="file" onchange="upload('#fileBtn6', '#img6');" accept="image/*" capture="camera"/>
+                    <img src="" id="img6" style="width:100%;height:100%;"/>
+                    <span>+</span>
+                </li>
+            </ul>
+
+</body>
+<script type="text/javascript">
+	//拍照和从相册中取出图片
+	var upload = function(c, d){
+    "use strict";
+    var $c = document.querySelector(c),
+        $d = document.querySelector(d),
+        file = $c.files[0],
+        reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(e){
+        $d.setAttribute("src", e.target.result);
+    };
+   $(c).siblings('span').remove();
+};
+
+
+
+
+//只能从相册中取出图片
+
+/*<input type="file" onchange="selectImage(this)">*/
+  var image = '';
+    function selectImage(file) {
+        if (!file.files || !file.files[0]) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var nn=document.getElementById('img2');
+            nn.src = evt.target.result;
+            image = evt.target.result;
+
+
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+</script>
+</html>
